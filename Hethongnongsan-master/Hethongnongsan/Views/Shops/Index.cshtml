@@ -1,0 +1,346 @@
+﻿@model Hethongnongsan.Models.Shop
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Headerpage.cshtml";
+    ViewBag.idnguoidung = Request.Cookies["nguoidung"]?.Value.Replace("=", "");
+}
+
+@{ if (Model != null && @ViewBag.nguoidung != null)
+    {
+
+        if (ViewBag.sanpham == null)
+        {
+
+            <div class="main-banner">
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-lg-6 align-self-center">
+                            <div class="caption header-text" style="display:flex">
+                                <h1>Hiện bạn không có sản phẩm nào</h1>
+                                <a href="/Shops/newShop/@ViewBag.nguoidung.Idnguoidung" style="color: white">Hãy thêm sản phẩm</a>
+                            </div>
+                            <div class="col-lg-4 offset-lg-2">
+                                <div class="right-image">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section trending">
+                <div class="container" style="background-color:white">
+
+
+                    <div class="row trending-box">
+
+
+                        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6">
+                            <div class="item">
+                                <div class="thumb">
+
+
+                                </div>
+                                <div class="down-content">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="pagination">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="loader">
+                <div class="loader-inner">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <!--PreLoader Ends-->
+            <!-- header -->
+            <div class="top-header-area" id="sticker">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 text-center">
+                            <div class="main-menu-wrap">
+                                <!-- logo -->
+                                <div class="site-logo">
+                                    <a href="index.html">
+                                        <img src="~/App_Start/assets/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                                <!-- logo -->
+                                <!-- menu start -->
+                                <nav class="main-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/Home/Index">Home</a>
+                                        </li>
+
+                                        @{ if (@ViewBag.idnguoidung != null)
+                                            {
+                                                <li><a href="/Products/Detail/@ViewBag.idnguoidung">Giỏ hàng</a></li>
+                                                <li class="current-list-item"> <a href="/Shops/Index/@ViewBag.idnguoidung">Cửa hàng của bạn</a></li>
+                                                <li> <a href="/Profilesuser/Index/@ViewBag.idnguoidung">Hồ sơ</a></li>
+
+
+                                                <li><a href="/Forum/addForum">blogs</a></li>
+                                                if (ViewBag.shop != null)
+                                                {
+                                                    <li><a href="/ManagementShop/Index/@ViewBag.idnguoidung">Quản lý kho</a></li>
+                                                }
+                                                if (@ViewBag.idnguoidung == "1")
+                                                {
+                                                    <li><a href="/Admin/Index">ADMIN</a></li>
+                                                }
+
+                                                <li><a href="/Login/out">log out</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <div class="fas fa-user" id="login-btn"><a href="/Login/Index" style="text-decoration: none;">Đăng nhập</a></div>
+                                                </li>
+
+                                            }
+                                        }
+
+
+
+
+                                    </ul>
+                                </nav>
+                                <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                <div class="mobile-menu"></div>
+                                <!-- menu end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-section breadcrumb-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2 text-center">
+                            <div class="breadcrumb-text">
+                                <p>Chào Mừng bạn đến shop</p>
+                                <h1>@Model.Tenshop</h1>
+                                <div style="font-size:10px;font-family:Bahnschrift ;text-align:center;width:100%; color:white;margin-top:10%">
+                                    <div style="color:aliceblue"> 🌱 Chào mừng đến với "Xanh Tươi" - Nơi Tận Hưởng Sự Tươi Mát Của Nông Sản 🌱</div><br />
+
+                                    Tại "Xanh Tươi", chúng tôi tự hào là điểm đến hàng đầu cho những ai yêu thích và quan tâm đến chất lượng của các sản phẩm nông sản. Với cam kết mang lại sự tươi mới và độ ẩm tự nhiên cho mỗi sản phẩm, chúng tôi đang dần khẳng định vị thế của mình là điểm đến uy tín và đáng tin cậy cho mọi nhu cầu dinh dưỡng và sức khỏe.p
+                                </div>
+                                <h4 style="color:aliceblue;margin-top:10%"> Chủ sở hữu </h4> <h1 style="color:orange"> @ViewBag.nguoidung.Tennguoidung </h1>
+                                <div class="col-lg-6 align-self-center">
+                                    <div class="caption header-text" style="display:flex; margin-left:10%">
+                                        <div>
+                                            <div style="font-family:'Lucida Sans';color:wheat"> 🥦 Ngay Thanh lap</div><p> @Model.Ngaythanhlap</p>
+
+                                            <div style=" font-family: 'Lucida Sans'; color: wheat">🥦 Dia chi </div><p> @Model.Diachi</p>
+
+                                            <div style=" font-family: 'Lucida Sans'; color: wheat ">🥦 So dien thoai </div><p> @Model.Sdt</p>
+
+                                            <div style=" font-family: 'Lucida Sans'; color: wheat ">🥦 Email </div><p> @Model.Email</p>
+
+                                            <div style=" font-family: 'Lucida Sans'; color: wheat "> 🥦 Facebook </div><p> @Model.Facebook</p>
+
+                                            <div style=" font-family: 'Lucida Sans'; color: wheat "> 🥦 Instagram </div><p> @Model.Instagram</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="border: 20px; padding-left: 100px; padding-right: 110px; border-radius: 10px; background-color: white; width: 10% ;margin-top:100px"><a href="/Shops/Edit/@ViewBag.idnguoidung" style="color:black"> Sửa </a></div>
+
+                <div style="border: 20px; padding-left: 100px; padding-right: 110px; border-radius: 10px; background-color: orange; width: 10%; margin-top: 10px"><a href="/Shops/Delete/@ViewBag.idnguoidung" style="color:black;"> Xóa </a></div>
+
+            </div>
+
+
+            <a href="/Supply/Addpro/@ViewBag.nguoidung.Idnguoidung" style="color: black; padding:10px;padding-right:500px;padding-left:500px;border-radius:10px;margin-left:200px; font-size:15px;font-weight:700; background-color:chocolate">Thêm sản phẩm</a>
+            <div class="product-section mt-150 mb-150">
+                <div class="container">
+                    @{if (ViewBag.sanpham.Count == 0)
+                        {
+
+                            <a href="/Supply/Addpro/@ViewBag.nguoidung.Idnguoidung" style="color: black">Hay them san pham cua rieng ban nao</a>
+
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="product-filters">
+                                        <ul>
+                                            <li class="active" data-filter="*">All</li>
+                                            @foreach (var item in ViewBag.label)
+                                            {
+
+                                                string strWithoutSpaces = @item.Replace(" ", "");
+
+                                                <li data-filter=".@strWithoutSpaces">
+                                                    @item
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div class="row product-lists">
+                        @{ foreach (var item in ViewBag.sanpham)
+                            {
+                                string strWithoutSpaces = @item.Tenloai.Replace(" ", "");
+
+                                <div class="col-lg-4 col-md-6 text-center @strWithoutSpaces">
+                                    <div class="single-product-item">
+                                        <div class="product-image">
+                                            <a href="single-product.html"><img src="~/img/@item.Linkhinhanh" alt=""></a>
+                                        </div>
+                                        <h3>@item.Tensanpham</h3>
+                                        <p>Tên loại: @item.Tenloai</p>
+                                        <p class="product-price"><span>Per Kg</span> @item.Gia </p>
+                                        <a href="/Supply/Editpro/@item.Idsanpham" class="cart-btn"><i class="fas fa-shopping-cart"></i> Sua</a>
+                                        <a href="/Supply/Deletepro?idsp=@item.Idsanpham&idshop=@item.Idshop" class="cart-btn"><i class="fas fa-shopping-cart"></i> Xoa</a>
+                                    </div>
+                                </div>
+
+                                @* <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 @item.Tenloai" style="margin:2px;height:350px">
+                                        <div class="item">
+                                            <div class="thumb">
+                                                <a href="product-details.html"><img src="~/img/@item.Linkhinhanh" style="height:195px" alt=""></a>
+                                                <span class="price"><em>$36</em>$@item.Gia</span>
+                                            </div>
+                                            <div class="down-content">
+                                                <div style="font-size:30px;font-weight:800;background-color:;border-radius:5px; color:black"> @item.Tensanpham</div>
+                                                <span class="category" style="font-size:10px;margin-left:20px"> Tên loại: @item.Tenloai</span>
+
+
+                                            </div>
+                                            <div style="margin-left:10px;padding-bottom:10px">
+                                                <a href="/Supply/Editpro/@item.Idsanpham" style="padding:7px;font-size:10px;margin-left:10px; border:15px;border-radius:10px;background-color:orange;font-weight:700;color:black">Edit sản phẩm</a>
+                                                <a href="/Supply/Deletepro?idsp=@item.Idsanpham&idshop=@item.Idshop" style="margin-top: 20px; font-size: 10px; margin-left: 30px; padding: 7px; border: 15px; border-radius: 10px; background-color: darkgray;color:black">Xóa sản phẩm</a>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+        }
+    }
+    else
+    {
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <!--PreLoader Ends-->
+        <!-- header -->
+        <div class="top-header-area" id="sticker">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 text-center">
+                        <div class="main-menu-wrap">
+                            <!-- logo -->
+                            <div class="site-logo">
+                                <a href="index.html">
+                                    <img src="~/App_Start/assets/img/logo.png" alt="">
+                                </a>
+                            </div>
+                            <!-- logo -->
+                            <!-- menu start -->
+                            <nav class="main-menu">
+                                <ul>
+                                    <li>
+                                        <a href="/Home/Index">Home</a>
+                                    </li>
+
+                                    @{ if (@ViewBag.idnguoidung != null)
+                                        {
+                                            <li><a href="/Products/Detail/@ViewBag.idnguoidung">Giỏ hàng</a></li>
+                                            <li class="current-list-item"> <a href="/Shops/Index/@ViewBag.idnguoidung">Cửa hàng của bạn</a></li>
+                                            <li> <a href="/Profilesuser/Index/@ViewBag.idnguoidung">Hồ sơ</a></li>
+
+
+                                            <li><a href="/Forum/addForum">blogs</a></li>
+                                            if (ViewBag.shop != null)
+                                            {
+                                                <li><a href="/ManagementShop/Index/@ViewBag.idnguoidung">Quản lý kho</a></li>
+                                            }
+                                            if (@ViewBag.idnguoidung == "1")
+                                            {
+                                                <li><a href="/Admin/Index">ADMIN</a></li>
+                                            }
+
+                                            <li><a href="/Login/out">log out</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <div class="fas fa-user" id="login-btn"><a href="/Login/Index" style="text-decoration: none;">Đăng nhập</a></div>
+                                            </li>
+
+                                        }
+                                    }
+
+
+
+
+                                </ul>
+                            </nav>
+                            <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                            <div class="mobile-menu"></div>
+                            <!-- menu end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+                            <p>Get 24/7 Support</p>
+                            <h1>Bạn Chưa Tạo Shop</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:200px; background-image:url(../../img/store-not-found.png); width:100%; background-size:500px;background-repeat:no-repeat;height:500px; margin-left:500px">
+
+        </div>
+
+        <a style="color:black; font-size:25px;font-weight:600;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;margin-left:520px" href="/Shops/newShop/@ViewBag.nguoidung.Idnguoidung">🛒 Nhấn vào đây để tạo shop riêng cho bạn</a>
+
+        <div style="margin-bottom:100px"></div>
+    }
+}
+
+

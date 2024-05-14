@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "productsofcustumers";
+    Layout = "~/Views/Shared/Headerpage.cshtml";
+    ViewBag.idnguoidung = Request.Cookies["nguoidung"]?.Value.Replace("=", ""); ;
+
+}
+@model List<Hethongnongsan.Models.Shopcart>
+<div class="loader">
+    <div class="loader-inner">
+        <div class="circle"></div>
+    </div>
+</div>
+<!--PreLoader Ends-->
+<!-- header -->
+<div class="top-header-area" id="sticker">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <div class="main-menu-wrap">
+                    <!-- logo -->
+                    <div class="site-logo">
+                        <a href="index.html">
+                            <img src="~/App_Start/assets/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <!-- logo -->
+                    <!-- menu start -->
+                    <nav class="main-menu">
+                        <ul>
+                            <li>
+                                <a href="/Home/Index">Home</a>
+                            </li>
+
+                            @{ if (@ViewBag.idnguoidung != null)
+                                {
+                                    <li class="current-list-item"><a href="/Products/Detail/@ViewBag.idnguoidung">Giỏ hàng</a></li>
+                                    <li> <a href="/Shops/Index/@ViewBag.idnguoidung">Cửa hàng của bạn</a></li>
+                                    <li> <a href="/Profilesuser/Index/@ViewBag.idnguoidung">Hồ sơ</a></li>
+
+
+                                    <li><a href="/Forum/addForum">blogs</a></li>
+                                    if (ViewBag.shop != null)
+                                    {
+                                        <li><a href="/ManagementShop/Index/@ViewBag.idnguoidung">Quản lý kho</a></li>
+                                    }
+                                    if (@ViewBag.idnguoidung == "1")
+                                    {
+                                        <li><a href="/Admin/Index">ADMIN</a></li>
+                                    }
+
+                                    <li><a href="/Login/out">log out</a></li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="fas fa-user" id="login-btn"><a href="/Login/Index" style="text-decoration: none;">Đăng nhập</a></div>
+                                    </li>
+
+                                }
+                            }
+
+
+
+
+                        </ul>
+                    </nav>
+                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                    <div class="mobile-menu"></div>
+                    <!-- menu end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Giỏ Hàng</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{ if (ViewBag.shopcart.Count > 0 && ViewBag.sanpham.Count > 0)
+    {
+        <div class="cart-section mt-150 mb-150">
+            <div class="container">
+                <div class="row">
+
+                    @{if (ViewBag.shopcart.Count > 0 && ViewBag.sanpham.Count > 0)
+                        {
+                            <div class="col-lg-8 col-md-12">
+                                <div class="cart-table-wrap">
+                                    <table class="cart-table">
+                                        <thead class="cart-table-head">
+                                            <tr class="table-head-row">
+                                                <th class="product-remove"></th>
+                                                <th class="product-image">Product Image</th>
+                                                <th class="product-name">Name</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product-total">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @{int i = 0; float total = 0; float sp = 0; string listidsp = ""; string listidshopcart = ""; string dayNow = DateTime.Now.Date.ToString("MM-dd-yyyy"); string tensp = ""; int idshop = 0;}
+
+                                            @foreach (var item in ViewBag.shopcart)
+                                            {
+                                                listidshopcart = listidshopcart + item.Idshopcart + ",";
+                                                foreach (var isa in ViewBag.sanpham)
+                                                {
+                                                    if (item.Idsanpham == isa.Idsanpham)
+                                                    {
+                                                        sp = 0;
+                                                        sp = item.Soluong * (float)isa.Gia;
+                                                        total = total + sp;
+                                                        listidsp = listidsp + item.Idsanpham + ",";
+                                                        tensp = tensp + isa.Tensanpham + ",";
+                                                        <tr class="table-body-row">
+                                                            <td class="product-remove"><a href="/Products/Delete?idnguoidung=@ViewBag.idnguoidung&idshopcart=@item.Idshopcart"><i class="far fa-window-close"></i></a></td>
+                                                            <td class="product-image"><img src="~/img/@isa.Linkhinhanh" alt=""></td>
+                                                            <td class="product-name">@isa.Tensanpham</td>
+                                                            <td class="product-price">@isa.Gia</td>
+                                                            <td class="product-total">@item.Soluong</td>
+                                                        </tr>
+                                                        break;
+                                                    }
+                                                }
+                                                i++;
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="total-section">
+
+                                    <form action="/Sold/soldpro" method="post">
+                                        <strong>Shipping: </strong>
+                                        <select id="tinhThanh" name="Diachi">
+                                            <option value="">Chọn Tỉnh/Thành phố</option>
+                                            <option value="Hà Nội">Hà Nội</option>
+                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                            <option value="Đà Nẵng">Đà Nẵng</option>
+                                            <option value="Hải Phòng">Hải Phòng</option>
+                                            <option value="Cần Thơ">Cần Thơ</option>
+                                        </select>
+                                        <br>
+                                        <strong>Địa chỉ: </strong>
+                                        <input type="hidden" name="Idnguoimua" value="@ViewBag.idnguoidung">
+                                        <input type="hidden" name="Idshop" value="@ViewBag.shopcart[0].Idshopcart">
+                                        <input type="hidden" name="Tensanpham" value="@tensp">
+                                        <input type="hidden" name="Idsp" value="@listidsp">
+                                        <input type="hidden" name="Ngayban" value="@dayNow">
+                                        <input type="hidden" name="Idshopcart" value="@listidshopcart">
+                                        <br>
+                                        <strong>Total: </strong>
+                                        @total $
+                                        <div class="cart-buttons">
+                                            <button type="submit" class="boxed-btn black"> Mua ngay</button>
+                                        </div>
+                                    </form>
+
+
+
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div style="height: 100%; background-image: url(../../img/no-product.png); background-repeat: no-repeat; background-position: center center;">
+
+        </div>
+        <div>
+
+        </div>
+        <div style="margin-bottom: 100px">
+            <div style="font-size:20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin-left:600px;margin-bottom:50px">
+                Không tìm thấy sản phẩm nào trong giỏ hàng
+            </div>
+            <a href="/Home/Index" style="font-size:20px;margin-left:730px;">⟲ Quay lại </a>
+        </div>
+    }
+}

@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.idnguoidung = Request.Cookies["nguoidung"]?.Value.Replace("=", "");
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+    <!-- title -->
+    <title>VAPMS</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="~/App_Start/assets/img/favicon.png">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/App_Start/assets/bootstrap/css/bootstrap.min.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/owl.carousel.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/magnific-popup.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/animate.css">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/meanmenu.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/main.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="~/App_Start/assets/css/responsive.css">
+
+</head>
+<body>
+    <!--PreLoader-->
+    <!-- end header -->
+    @RenderBody()
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box about-widget">
+                        <h2 class="widget-title">About us</h2>
+                        <p>Chúng tôi là một đội ngũ chuyên gia đam mê về ẩm thực và chăm sóc sức khỏe. Chúng tôi cam kết mang đến cho bạn những sản phẩm thực phẩm chất lượng cao, an toàn và ngon miệng.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box get-in-touch">
+                        <h2 class="widget-title">Get in Touch</h2>
+                        <ul>
+                            <li> Dien Bien Phu, Thanh Khe, Da Nang.</li>
+                            <li>duytrinh@2d2t.com</li>
+                            <li>+00 111 222 3333</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">Pages</h2>
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+
+                            <li><a href="/Shops/Index/@ViewBag.idnguoidung">Shop</a></li>
+                            <li><a href="/Forum/addForuml">Blogs</a></li>
+                            <li><a href="/Profilesuser/Index/@ViewBag.idnguoidung">Hồ Sơ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box subscribe">
+                        <h2 class="widget-title">Subscribe</h2>
+                        <p>Đăng ký vào danh sách gửi thư của chúng tôi để nhận được những cập nhật mới nhất.</p>
+                        <form action="/Login/Index">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end footer -->
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
+    <!-- end copyright -->
+    <!-- jquery -->
+    <script src="~/App_Start/assets/js/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/App_Start/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- count down -->
+    <script src="~/App_Start/assets/js/jquery.countdown.js"></script>
+    <!-- isotope -->
+    <script src="~/App_Start/assets/js/jquery.isotope-3.0.6.min.js"></script>
+    <!-- waypoints -->
+    <script src="~/App_Start/assets/js/waypoints.js"></script>
+    <!-- owl carousel -->
+    <script src="~/App_Start/assets/js/owl.carousel.min.js"></script>
+    <!-- magnific popup -->
+    <script src="~/App_Start/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- mean menu -->
+    <script src="~/App_Start/assets/js/jquery.meanmenu.min.js"></script>
+    <!-- sticker js -->
+    <script src="~/App_Start/assets/js/sticker.js"></script>
+    <!-- main js -->
+    <script src="~/App_Start/assets/js/main.js"></script>
+    <script src="~/App_Start/assets/js/al.js"></script>
+    <script src="~/App_Start/assets/js/validatePassword.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+</body>
+</html>
